@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
 
     s.summary       = "Allows interaction with Nessus REST API."
     s.description   = "Intelligently allows for use of Nessus API, both with gathering and editing information."
+    s.license       = 'MIT'
 
     s.authors       = "Nicholas Wold"
     s.email         = "nicholas.wold@berkeley.edu"

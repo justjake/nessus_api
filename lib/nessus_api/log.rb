@@ -7,7 +7,7 @@ module NessusAPI
         end
 
         def self.error(msg=nil)
-            say("ERROR: "foreground(:red).bright + msg)
+            say("ERROR: ".foreground(:red).bright + msg)
         end
     end
 end
