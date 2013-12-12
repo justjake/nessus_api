@@ -42,7 +42,7 @@ module NessusAPI
             begin
                 response = session.get('policy/list')
                 response.css('policy').each do |p|
-                    Policy.new(p.css('policyID').content, p.css('policyName').content)
+                    Policy.new(p.css('policyID').text, p.css('policyName').text)
                 end
                 return @@policies
             rescue

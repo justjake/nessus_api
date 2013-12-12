@@ -16,7 +16,7 @@ module NessusAPI
             results = {"template_name" => @name, "policy_id" => @policy,
                 "target" => @target}
             if !@time.nil?
-                results['startTime'] = @time.strftime("%Y%m%dT%H%M%S")
+                results['startTime'] = @time
             end
             rules = "FREQ=#{@freq}"
             if !@interval.nil?
@@ -24,6 +24,10 @@ module NessusAPI
             end
             results['rRules'] = rules
             return results
+        end
+
+        def time=(time)
+            @time = time.strftime("%Y%m%dT%H%M%S")
         end
 
         def save(session)
