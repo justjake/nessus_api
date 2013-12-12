@@ -19,7 +19,7 @@ class TestNessusAPI < Test::Unit::TestCase
         scan = NessusAPI::Template.new("New Test Scan", policy, "127.0.0.1")
         # We have our template set up, so now we need to set a time.
         scan.time = Time.now + 3600*24
-        say(scan.to_hash)
+        say(scan.to_hash.inspect)
         assert_equal(scan.save, true, "Saving isn't working")
     end
 
