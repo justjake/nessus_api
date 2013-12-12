@@ -39,10 +39,10 @@ module NessusAPI
 
             if response.is_a?(Net::HTTPSuccess)
                 response_xml = Nokogiri::XML(response.body)
-                if response_xml.xpath("//seq").content != seq
+                if response_xml.xpath("//seq").first.content != seq
                     Log.error("Sequence doesn't match between request and response")
                     raise
-                elsif response_xml.xpath("//status").content != 'OK'
+                elsif response_xml.xpath("//status").first.content != 'OK'
                     Log.error("Request was not completed")
                     raise
                 else
