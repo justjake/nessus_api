@@ -31,7 +31,8 @@ module NessusAPI
             args['seq'] = Random.new.rand(9999)
             url = URI('https://' + host + ':' + port + '/' + function)
             Net::HTTP.start(url.host, url.port,
-                :use_ssl => url.scheme == 'https') do |http|
+                :use_ssl => url.scheme == 'https',
+                :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
                 request = Net::HTTP::Post.new(url)
                 request.set_form_data(args)
                 response = http.request(request)
