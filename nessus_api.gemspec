@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
 
     s.add_dependency('rainbow')
     s.add_dependency('nokogiri')
+    s.add_development_dependency('highline')
 
     s.files = Dir['{bin,lib,man,test,spec}/**/*', 'README*',
         'LICENSE*'] & `git ls-files -z`.split("\0")

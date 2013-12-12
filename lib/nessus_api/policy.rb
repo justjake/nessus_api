@@ -31,7 +31,7 @@ module NessusAPI
         end
 
         def self.get(id)
-                return self.all[id]
+            return self.all[id]
         end
 
         def self.all
@@ -52,7 +52,7 @@ module NessusAPI
                 response.xpath("//policy").each do |policy|
                     Policy.new(policy)
                 end
-                return true
+                return self.all
             rescue
                 return false
             end

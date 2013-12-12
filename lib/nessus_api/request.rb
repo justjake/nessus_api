@@ -18,10 +18,10 @@ module NessusAPI
             @port = port.to_s
             data = {'login' => login, 'password' => password}
             request = get('login', data, false)
-            @token = request.xpath("//contents/token").content
+            @token = request.xpath("//token").content
         end
 
-        def get(function, args={}, token=true, host=@host)
+        def get(function, args={}, token=true, host=@host, port=@port)
             ##
             # Adds expected data to the arguments
             # and then makes a HTTP request.
