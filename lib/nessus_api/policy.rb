@@ -8,13 +8,13 @@ module NessusAPI
 
         @@policies = {}
 
-        def initialize(xml)
+        def initialize(id, name)
             ##
             # Takes individual XML from a server response
             # and translates it into a single object.
             # Adds the object to policies hash.
-            @id = xml.xpath("//policyID")[0].content
-            @name = xml.xpath("//policyName")[0].content
+            @id = id
+            @name = name
             save()
         end
 
@@ -41,8 +41,8 @@ module NessusAPI
             # policies that are then turned into objects.
             begin
                 response = session.get('policy/list')
-                response.xpath("//policy").each do |policy|
-                    Policy.new(policy)
+                response.css('policy').each do |p|
+                    Policy.new(p.css('policyID').content, p.css('policyName').content)
                 end
                 return @@policies
             rescue
