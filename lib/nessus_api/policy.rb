@@ -14,7 +14,7 @@ module NessusAPI
             # and translates it into a single object.
             # Adds the object to policies hash.
             def search(tag)
-                return xml.xpath("//#{tag}").content
+                return xml.xpath("//#{tag}")[0].content
             end
 
             @id = search("policyID")

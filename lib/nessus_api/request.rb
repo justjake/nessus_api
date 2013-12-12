@@ -18,7 +18,7 @@ module NessusAPI
             @port = port.to_s
             data = {'login' => login, 'password' => password}
             request = get('login', data, false)
-            @token = request.xpath("//token").content
+            @token = request.xpath("//token")[0].content
         end
 
         def get(function, args={}, token=true, host=@host, port=@port)
@@ -40,10 +40,10 @@ module NessusAPI
 
             if response.is_a?(Net::HTTPSuccess)
                 response_xml = Nokogiri::XML(response.body)
-                if response_xml.xpath("//seq").first.content != seq
+                if response_xml.xpath("//seq")[0].content != seq
                     Log.error("Sequence doesn't match between request and response")
                     raise
-                elsif response_xml.xpath("//status").first.content != 'OK'
+                elsif response_xml.xpath("//status")[0].content != 'OK'
                     Log.error("Request was not completed")
                     raise
                 else

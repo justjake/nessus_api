@@ -29,7 +29,7 @@ module NessusAPI
         def save(session)
             begin
                 response = session.get('scan/template/new', to_hash())
-                return response.xpath("//name").content
+                return response.xpath("//name")[0].content
             rescue
                 return false
             end
