@@ -11,7 +11,7 @@ class TestNessusAPI < Test::Unit::TestCase
         port = ask("Port: ")
         @session = NessusAPI::Session.new(host, user, password, port)
         # Then, I'll have to be able to find all of the policies available.
-        policies = NessusAPI::Template.collect(@session)
+        policies = NessusAPI::Policy.collect(@session)
         say(policies)
         # Assume that we pick the first policy.
         policy = policies.keys[0]
