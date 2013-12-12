@@ -5,9 +5,9 @@ require 'highline/import'
 class TestNessusAPI < Test::Unit::TestCase
     def test_base_usage
         # First, I'll connect to the Nessus installation
-        host = ask("Host: ") {|q| q.echo = false}
+        host = ask("Host: ")
         user = ask("Username: ")
-        password = ask("Password: ")
+        password = ask("Password: ") {|q| q.echo = false}
         port = ask("Port: ")
         @session = NessusAPI::Session.new(host, user, password, port)
         # Then, I'll have to be able to find all of the policies available.
