@@ -28,7 +28,7 @@ module NessusAPI
             if token
                 args['token'] = @token
             end
-            seq = Random.new.rand(9999)
+            seq = Random.new.rand(9999).to_s
             args['seq'] = seq
             url = URI('https://' + host + ':' + port + '/' + function)
             request = Net::HTTP::Post.new(url.path)
