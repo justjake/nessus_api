@@ -30,13 +30,12 @@ module NessusAPI
             end
             args['seq'] = Random.new.rand(9999)
             url = URI('https://' + host + ':' + port + '/' + function)
-            Net::HTTP.start(url.host, url.port,
-                :use_ssl => url.scheme == 'https',
-                :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
-                request = Net::HTTP::Post.new(url)
-                request.set_form_data(args)
-                response = http.request(request)
-            end
+            request = Net::HTTP::Post.new(url.path)
+            request.set_form_data(args)
+            conn = Net::HTTP.new(url.host, url.port)
+            conn.use_ssl = true
+            conn.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            response = conn.request(request)
 
             if response.is_a?(Net::HTTPSuccess)
                 response_xml = Nokogiri::XML(response)
