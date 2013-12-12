@@ -13,17 +13,13 @@ module NessusAPI
             # Takes individual XML from a server response
             # and translates it into a single object.
             # Adds the object to policies hash.
-            def search(tag)
-                return xml.xpath("//#{tag}")[0].content
-            end
-
-            @id = search("policyID")
-            @name = search("policyName")
+            @id = xml.xpath("//policyID")[0].content
+            @name = xml.xpath("//policyName")[0].content
             save()
         end
 
         def save
-            self.all[@id] << self
+            @@policies[@id] = self
         end
 
         def to_s
@@ -31,11 +27,7 @@ module NessusAPI
         end
 
         def self.get(id)
-            return self.all[id]
-        end
-
-        def self.all
-            return @@policies
+            return @@policies[id]
         end
 
         def self.clear
@@ -52,7 +44,7 @@ module NessusAPI
                 response.xpath("//policy").each do |policy|
                     Policy.new(policy)
                 end
-                return self.all
+                return @@policies
             rescue
                 return false
             end

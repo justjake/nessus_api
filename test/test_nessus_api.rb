@@ -12,7 +12,7 @@ class TestNessusAPI < Test::Unit::TestCase
         @session = NessusAPI::Session.new(host, user, password, port)
         # Then, I'll have to be able to find all of the policies available.
         policies = NessusAPI::Policy.collect(@session)
-        say(policies)
+        say(policies.inspect)
         # Assume that we pick the first policy.
         policy = policies.keys[0]
         # Now we need to create a scan using this policy...
